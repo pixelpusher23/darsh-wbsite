@@ -11,8 +11,7 @@
     height: 100vh;
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    overflow-y: auto;
-    overflow-x:hidden;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,38 +58,13 @@
     margin-top: 15px;
   }
 
-  .letter {
-    margin-top: 15px;
-    font-size: 16px;
-    line-height: 1.6;
-  }
-
   .hidden {
     display: none;
-  }
-
-  /* Floating hearts */
-  .heart {
-    position: absolute;
-    bottom: -20px;
-    font-size: 24px;
-    animation: floatUp 6s linear infinite;
-    opacity: 0.8;
-  }
-
-  @keyframes floatUp {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-120vh); opacity: 0; }
   }
 </style>
 </head>
 
 <body>
-
-<!-- Background Music -->
-<audio id="music" autoplay loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
 
 <!-- Question Box -->
 <div class="box" id="questionBox">
@@ -99,47 +73,26 @@
   <button class="no" id="noBtn" onmouseover="moveNo()">No 💔</button>
 </div>
 
-<!-- Love Letter Box -->
-<div class="box hidden" id="loveBox">
-  <h1>You said YES 💞</h1>
+<!-- Surprise Message Box -->
+<div class="box hidden" id="surpriseBox">
+  <h1>I know u'll click YES 😏</h1>
   <img src="us.jpg" alt="Us Together">
-  <div class="letter">
-    My love ❤️<br><br>
-    Every moment with you feels like magic.
-    You are my favorite person, my safe place,
-    and my forever Valentine.
-    <br><br>
-    I love you endlessly 💕
-  </div>
 </div>
 
 <script>
   function yesClicked() {
     document.getElementById("questionBox").classList.add("hidden");
-    document.getElementById("loveBox").classList.remove("hidden");
+    document.getElementById("surpriseBox").classList.remove("hidden");
   }
 
   function moveNo() {
     const btn = document.getElementById("noBtn");
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
+    const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - btn.offsetHeight);
     btn.style.left = x + "px";
     btn.style.top = y + "px";
   }
-
-  // Floating hearts generator
-  setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 15 + "px";
-    document.body.appendChild(heart);
-
-    setTimeout(() => heart.remove(), 6000);
-  }, 400);
 </script>
 
 </body>
-
 </html>
